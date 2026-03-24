@@ -2,6 +2,8 @@
 
 A mini blog example app showcasing Meteor 3.4+ features: built-in roles & permissions, MJML email templates, and dev-mode mail preview.
 
+**Live demo:** https://example-simple-blog.sandbox.galaxycloud.app
+
 ## Quick Start
 
 ```bash
