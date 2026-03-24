@@ -1,0 +1,71 @@
+<template name="postDetailPage">
+  {{#if post}}
+    <article>
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <h2>{{post.title}}</h2>
+          <p class="text-muted">
+            By {{authorName post.authorId}} &middot; {{formatDate post.createdAt}}
+            {{#if post.hidden}}<span class="badge bg-danger ms-1">Hidden</span>{{/if}}
+          </p>
+        </div>
+        <div class="d-flex gap-2">
+          {{#if canEdit}}
+            <a href="/post/{{post._id}}/edit" class="btn btn-sm btn-outline-primary">Edit</a>
+          {{/if}}
+          {{#if isInRole "posts.hide"}}
+            <button class="btn btn-sm btn-outline-warning btn-toggle-hide">
+              {{#if post.hidden}}Unhide{{else}}Hide{{/if}}
+            </button>
+          {{/if}}
+          {{#if isInRole "posts.delete"}}
+            <button class="btn btn-sm btn-outline-danger btn-delete">Delete</button>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body" style="white-space: pre-wrap;">{{post.body}}</div>
+      </div>
+    </article>
+
+    <!-- Comments -->
+    <h4 class="mb-3">Comments ({{commentCount}})</h4>
+
+    {{#each comment in comments}}
+      <div class="card mb-2 comment-item">
+        <div class="card-body py-2 px-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <strong class="small">{{authorName comment.authorId}}</strong>
+              <small class="text-muted ms-2">{{formatDate comment.createdAt}}</small>
+            </div>
+            {{#if isInRole "comments.delete"}}
+              <button class="btn btn-sm btn-outline-danger btn-delete-comment" data-comment-id="{{comment._id}}">
+                &times;
+              </button>
+            {{/if}}
+          </div>
+          <p class="mb-0 mt-1">{{comment.text}}</p>
+        </div>
+      </div>
+    {{else}}
+      <p class="text-muted">No comments yet.</p>
+    {{/each}}
+
+    {{#if isInRole "comments.create"}}
+      <form class="comment-form mt-3">
+        <div class="input-group">
+          <input type="text" name="text" class="form-control" placeholder="Write a comment..." required>
+          <button type="submit" class="btn btn-primary">Post</button>
+        </div>
+      </form>
+    {{else}}
+      {{#unless currentUser}}
+        <p class="text-muted mt-3"><a href="/login">Login</a> to comment.</p>
+      {{/unless}}
+    {{/if}}
+  {{else}}
+    <p class="text-muted">Loading...</p>
+  {{/if}}
+</template>

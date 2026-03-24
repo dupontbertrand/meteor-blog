@@ -1,0 +1,122 @@
+<template name="usersPage">
+  {{#if isInRole "users.manage"}}
+    <h2 class="mb-4">User Management</h2>
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each user in allUsers}}
+              <tr class="align-middle">
+                <td>{{userEmail user}}</td>
+                <td><span class="badge role-{{currentRole user}}">{{currentRole user}}</span></td>
+                <td>
+                  {{#unless isSelf user._id}}
+                    <select class="form-select form-select-sm d-inline-block w-auto role-select"
+                            data-user-id="{{user._id}}">
+                      <option value="admin" selected="{{isRole user 'admin'}}">Admin</option>
+                      <option value="moderator" selected="{{isRole user 'moderator'}}">Moderator</option>
+                      <option value="editor" selected="{{isRole user 'editor'}}">Editor</option>
+                      <option value="viewer" selected="{{isRole user 'viewer'}}">Viewer</option>
+                    </select>
+                    <button class="btn btn-sm btn-outline-danger ms-2 btn-delete-user"
+                            data-user-id="{{user._id}}">Delete</button>
+                  {{else}}
+                    <span class="text-muted small">You</span>
+                  {{/unless}}
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h4 class="mt-5 mb-3">Roles & Permissions</h4>
+    <div class="row">
+    <div class="col-lg-8 mb-3">
+    <div class="card h-100">
+      <div class="table-responsive">
+        <table class="table table-sm table-bordered mb-0 text-center">
+          <thead class="table-light">
+            <tr>
+              <th class="text-start">Permission</th>
+              <th><span class="badge role-viewer">Viewer</span></th>
+              <th><span class="badge role-editor">Editor</span></th>
+              <th><span class="badge role-moderator">Moderator</span></th>
+              <th><span class="badge role-admin">Admin</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-start">Read posts</td>
+              <td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Write comments</td>
+              <td>&#10003;</td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Create posts</td>
+              <td></td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Edit own posts</td>
+              <td></td><td>&#10003;</td><td>&#10003;</td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Hide/unhide posts</td>
+              <td></td><td></td><td>&#10003;</td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Delete comments</td>
+              <td></td><td></td><td>&#10003;</td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Edit all posts</td>
+              <td></td><td></td><td></td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Delete posts</td>
+              <td></td><td></td><td></td><td>&#10003;</td>
+            </tr>
+            <tr>
+              <td class="text-start">Manage users</td>
+              <td></td><td></td><td></td><td>&#10003;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    </div>
+    <div class="col-lg-4 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="card-title">How it works</h6>
+          <p class="small">
+            <strong>Roles</strong> are high-level labels assigned to users: <em>admin</em>, <em>moderator</em>, <em>editor</em>, <em>viewer</em>.
+          </p>
+          <p class="small">
+            <strong>Permissions</strong> are granular capabilities like <code>posts.create</code> or <code>comments.delete</code>. They are attached to roles as children.
+          </p>
+          <p class="small">
+            Roles form a <strong>hierarchy</strong>: each role inherits all permissions from the roles below it. An <em>admin</em> automatically has every permission that <em>moderator</em>, <em>editor</em>, and <em>viewer</em> have.
+          </p>
+          <p class="small mb-0">
+            This uses Meteor's built-in <code>roles</code> package (since 3.1).
+            <a href="https://docs.meteor.com/packages/roles" target="_blank">Read the docs &rarr;</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  {{else}}
+    <div class="alert alert-danger">Access denied. Admin role required.</div>
+  {{/if}}
+</template>

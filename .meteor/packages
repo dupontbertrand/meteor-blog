@@ -1,0 +1,35 @@
+# Meteor packages used by this project
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+jquery
+reactive-var
+tracker
+
+standard-minifier-css
+standard-minifier-js
+es5-shim
+ecmascript
+typescript
+shell-server
+hot-module-replacement
+blaze-hot
+
+# Routing
+ostrio:flow-router-extra
+
+# Auth & Roles
+accounts-password
+roles
+
+# Email
+email
+dupontbertrand:mail-preview
+
+# Testing
+meteortesting:mocha
+communitypackages:publication-collector@2.0.0-rc.1
+
+# Bundler
+rspack

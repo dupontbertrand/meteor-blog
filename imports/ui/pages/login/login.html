@@ -1,0 +1,41 @@
+<template name="loginPage">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+              <a class="nav-link {{#if isLogin}}active{{/if}} tab-login" href="#">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{#unless isLogin}}active{{/unless}} tab-register" href="#">Register</a>
+            </li>
+          </ul>
+
+          <form class="auth-form">
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              {{#if isLogin}}Login{{else}}Register{{/if}}
+            </button>
+          </form>
+
+          {{#if error}}
+            <div class="alert alert-danger mt-3 mb-0">{{error}}</div>
+          {{/if}}
+
+          <hr>
+          <p class="text-muted small mb-0">
+            Test accounts: admin, moderator, editor, viewer @test.com (password: password)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

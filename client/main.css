@@ -1,0 +1,8 @@
+.post-card { transition: box-shadow 0.15s; }
+.post-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.post-hidden { opacity: 0.5; border-left: 3px solid #dc3545; }
+.comment-item { border-left: 3px solid #0d6efd; }
+.role-admin { background-color: #dc3545; }
+.role-moderator { background-color: #fd7e14; }
+.role-editor { background-color: #0d6efd; }
+.role-viewer { background-color: #6c757d; }
