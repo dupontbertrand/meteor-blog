@@ -53,7 +53,6 @@ Roles form a hierarchy: **admin > moderator > editor > viewer**. Each role inher
 - Meteor 3.4 / Blaze
 - Bootstrap 5
 - MJML (email templates)
-- Chart.js is not included — this is intentionally minimal
 - Rspack bundler
 
 ## Mail Preview
