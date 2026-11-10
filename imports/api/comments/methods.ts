@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Email } from 'meteor/email';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/roles';
 import { Comments } from './collection';
@@ -6,7 +7,7 @@ import { Posts } from '../posts/collection';
 import { renderEmail } from '../../email/render';
 
 Meteor.methods({
-  async 'comments.create'(postId, text) {
+  async 'comments.create'(postId: string, text: string) {
     check(postId, String);
     check(text, String);
     if (!this.userId) throw new Meteor.Error('not-authorized');
@@ -45,7 +46,7 @@ Meteor.methods({
               html,
             });
           } catch (e) {
-            console.warn('Email send failed:', e.message);
+            console.warn('Email send failed:', e instanceof Error ? e.message : e);
           }
         }
       }
@@ -54,7 +55,7 @@ Meteor.methods({
     return commentId;
   },
 
-  async 'comments.delete'(commentId) {
+  async 'comments.delete'(commentId: string) {
     check(commentId, String);
     if (!this.userId) throw new Meteor.Error('not-authorized');
     if (!await Roles.userIsInRoleAsync(this.userId, 'comments.delete')) {

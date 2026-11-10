@@ -20,7 +20,7 @@ Meteor.publish('users.all', async function () {
 });
 
 // Publish user names for display (post authors, commenters)
-Meteor.publish('users.names', function (userIds) {
+Meteor.publish('users.names', function (userIds: string[]) {
   if (!Array.isArray(userIds)) return this.ready();
   return Meteor.users.find(
     { _id: { $in: userIds } },

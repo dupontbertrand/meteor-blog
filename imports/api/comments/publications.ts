@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Comments } from './collection';
 
-Meteor.publish('comments.byPost', function (postId) {
+Meteor.publish('comments.byPost', function (postId: string) {
   check(postId, String);
   return Comments.find({ postId }, { sort: { createdAt: 1 } });
 });

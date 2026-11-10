@@ -5,7 +5,7 @@ import { Roles } from 'meteor/roles';
 const VALID_ROLES = ['admin', 'moderator', 'editor', 'viewer'];
 
 Meteor.methods({
-  async 'users.setRole'(userId, role) {
+  async 'users.setRole'(userId: string, role: string) {
     check(userId, String);
     check(role, String);
     if (!this.userId) throw new Meteor.Error('not-authorized');
@@ -21,7 +21,7 @@ Meteor.methods({
     await Roles.setUserRolesAsync(userId, [role]);
   },
 
-  async 'users.delete'(userId) {
+  async 'users.delete'(userId: string) {
     check(userId, String);
     if (!this.userId) throw new Meteor.Error('not-authorized');
     if (!await Roles.userIsInRoleAsync(this.userId, 'users.manage')) {
