@@ -1,6 +1,8 @@
 import mjml2html from 'mjml';
 
-// Assets is provided per application by Meteor's server runtime.
+// Assets is provided per application by Meteor's server runtime. The native
+// package declarations do not cover this global yet; remove this shim once
+// https://github.com/meteor/meteor/pull/14829 ships.
 declare const Assets: {
   getTextAsync(path: string): Promise<string>;
 };

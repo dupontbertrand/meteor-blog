@@ -11,7 +11,7 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
   },
   webServer: {
-    command: `meteor run --port ${port} --exclude-archs web.browser.legacy,web.cordova`,
+    command: `meteor run --port ${port}`,
     url: `http://localhost:${port}`,
     timeout: 180000,
     reuseExistingServer: !process.env.CI,

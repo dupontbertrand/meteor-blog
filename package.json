@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "test": "TEST_CLIENT=0 meteor test --once --driver-package meteortesting:mocha --exclude-archs web.browser.legacy,web.cordova",
+    "test": "TEST_CLIENT=0 meteor test --once --driver-package meteortesting:mocha",
     "test:e2e": "playwright test",
     "types": "meteor types",
     "typecheck": "meteor types && tsc --noEmit"
