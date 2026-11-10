@@ -16,8 +16,8 @@
         <mj-text font-size="14px" color="#666" padding-top="10px">
           <strong>{{commenter}}</strong> commented:
         </mj-text>
-        <mj-text font-size="14px" color="#333" padding="15px" background-color="#f8f9fa" border-left="3px solid #0d6efd" border-radius="4px">
-          {{comment}}
+        <mj-text font-size="14px" color="#333">
+          <div style="padding: 15px; background-color: #f8f9fa; border-left: 3px solid #0d6efd; border-radius: 4px;">{{comment}}</div>
         </mj-text>
         <mj-button background-color="#0d6efd" href="{{url}}" padding-top="20px">View Post</mj-button>
       </mj-column>
