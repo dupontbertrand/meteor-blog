@@ -1,11 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+import { Email } from 'meteor/email';
 import { check } from 'meteor/check';
 import { Roles } from 'meteor/roles';
-import { Posts } from './collection';
+import { Posts, type PostInput } from './collection';
 import { renderEmail } from '../../email/render';
 
 Meteor.methods({
-  async 'posts.create'({ title, body }) {
+  async 'posts.create'({ title, body }: PostInput) {
     check(title, String);
     check(body, String);
     if (!this.userId) throw new Meteor.Error('not-authorized');
@@ -39,14 +40,14 @@ Meteor.methods({
           html,
         });
       } catch (e) {
-        console.warn('Email send failed:', e.message);
+        console.warn('Email send failed:', e instanceof Error ? e.message : e);
       }
     }
 
     return postId;
   },
 
-  async 'posts.update'(postId, { title, body }) {
+  async 'posts.update'(postId: string, { title, body }: PostInput) {
     check(postId, String);
     check(title, String);
     check(body, String);
@@ -67,7 +68,7 @@ Meteor.methods({
     });
   },
 
-  async 'posts.delete'(postId) {
+  async 'posts.delete'(postId: string) {
     check(postId, String);
     if (!this.userId) throw new Meteor.Error('not-authorized');
     if (!await Roles.userIsInRoleAsync(this.userId, 'posts.delete')) {
@@ -76,7 +77,7 @@ Meteor.methods({
     await Posts.removeAsync(postId);
   },
 
-  async 'posts.toggleHide'(postId) {
+  async 'posts.toggleHide'(postId: string) {
     check(postId, String);
     if (!this.userId) throw new Meteor.Error('not-authorized');
     if (!await Roles.userIsInRoleAsync(this.userId, 'posts.hide')) {

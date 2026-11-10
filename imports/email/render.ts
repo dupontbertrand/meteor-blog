@@ -1,8 +1,15 @@
 import mjml2html from 'mjml';
 
-const cache = {};
+// Assets is provided per application by Meteor's server runtime. The native
+// package declarations do not cover this global yet; remove this shim once
+// https://github.com/meteor/meteor/pull/14829 ships.
+declare const Assets: {
+  getTextAsync(path: string): Promise<string>;
+};
 
-export async function renderEmail(templateName, data = {}) {
+const cache: Record<string, string> = {};
+
+export async function renderEmail(templateName: string, data: Record<string, string> = {}) {
   if (!cache[templateName]) {
     cache[templateName] = await Assets.getTextAsync(`email-templates/${templateName}`);
   }

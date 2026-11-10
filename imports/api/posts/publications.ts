@@ -13,6 +13,6 @@ Meteor.publish('posts.all', async function () {
   );
 });
 
-Meteor.publish('posts.single', function (postId) {
+Meteor.publish('posts.single', function (postId: string) {
   return Posts.find({ _id: postId });
 });
