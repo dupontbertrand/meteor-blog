@@ -1,6 +1,6 @@
 # Meteor Blog
 
-A mini blog example app running on Meteor 3.6 with built-in roles & permissions, MJML email templates, and dev-mode mail preview.
+A mini blog example app running on Meteor 3.6.1 with built-in roles & permissions, MJML email templates, and dev-mode mail preview.
 
 **Live demo:** https://example-simple-blog.sandbox.galaxycloud.app
 
@@ -52,7 +52,7 @@ Roles form a hierarchy: **admin > moderator > editor > viewer**. Each role inher
 
 ## Stack
 
-- Meteor 3.6 / Blaze
+- Meteor 3.6.1 / Blaze
 - Bootstrap 5
 - MJML (email templates)
 - Rspack 2 with `@meteorjs/rspack` 3
